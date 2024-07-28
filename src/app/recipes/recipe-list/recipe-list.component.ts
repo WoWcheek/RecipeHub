@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { type Recipe } from '../recipe.model';
@@ -19,4 +19,10 @@ export class RecipeListComponent {
         'https://www.howtocook.recipes/wp-content/uploads/2021/05/Ratatouille-recipe.jpg',
     },
   ]);
+
+  recipeWasSelected = output<Recipe>();
+
+  onRecipeSelected(recipe: Recipe) {
+    this.recipeWasSelected.emit(recipe);
+  }
 }

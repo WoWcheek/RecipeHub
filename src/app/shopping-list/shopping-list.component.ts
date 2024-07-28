@@ -6,9 +6,9 @@ import { type Ingredient } from '../shared/ingredient.model';
 @Component({
   selector: 'app-shopping-list',
   standalone: true,
-  imports: [ShoppingEditComponent],
   templateUrl: './shopping-list.component.html',
   styleUrl: './shopping-list.component.css',
+  imports: [ShoppingEditComponent],
 })
 export class ShoppingListComponent {
   ingredients = signal<Ingredient[]>([
@@ -21,4 +21,8 @@ export class ShoppingListComponent {
       amount: 10,
     },
   ]);
+
+  onIngredientAdded(ingredient: Ingredient) {
+    this.ingredients.update((x) => [...x, ingredient]);
+  }
 }

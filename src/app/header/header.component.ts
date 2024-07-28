@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css',
   imports: [],
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  featureSelected = output<string>();
+
+  onSelect(feature: string) {
+    this.featureSelected.emit(feature);
+  }
+}

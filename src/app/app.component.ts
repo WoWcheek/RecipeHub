@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -11,4 +11,10 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
   styleUrl: './app.component.css',
   imports: [HeaderComponent, RecipesComponent, ShoppingListComponent],
 })
-export class AppComponent {}
+export class AppComponent {
+  currentFeature = signal('recipes');
+
+  onNavigate(feature: string) {
+    this.currentFeature.set(feature);
+  }
+}
