@@ -8,18 +8,27 @@ import { type Recipe } from './recipe.model';
 export class RecipesService {
   private recipes = signal<Recipe[]>([
     {
-      name: 'A Test Recipe',
-      description: 'Simple test',
+      name: 'Tasty Schnitzel',
+      description: 'A super tasty schnitzel - just awesome!',
       imagePath:
-        'https://www.howtocook.recipes/wp-content/uploads/2021/05/Ratatouille-recipe.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG/330px-Breitenlesau_Krug_Br%C3%A4u_Schnitzel.JPG',
+      ingredients: [
+        { name: 'Meat', amount: 1 },
+        { name: 'French Fries', amount: 20 },
+      ],
     },
     {
-      name: 'Second Recipe',
-      description: 'Just a test',
+      name: 'Big Fat Burger',
+      description: 'Loved by everyone!',
       imagePath:
-        'https://www.howtocook.recipes/wp-content/uploads/2021/05/Ratatouille-recipe.jpg',
+        'https://images.immediate.co.uk/production/volatile/sites/2/2015/08/12817.jpg?quality=90&webp=true&crop=2px,129px,596px,542px&resize=600,545',
+      ingredients: [
+        { name: 'Buns', amount: 2 },
+        { name: 'Meat', amount: 1 },
+      ],
     },
   ]);
+
   selectedRecipe = signal<Recipe | undefined>(undefined);
 
   allRecipes = this.recipes.asReadonly();

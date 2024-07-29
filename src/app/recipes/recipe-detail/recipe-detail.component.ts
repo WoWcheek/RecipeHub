@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 
 import { RecipesService } from '../recipes.service';
+import { ShoppingListService } from '../../shopping-list/shopping-list.service';
 import { DropdownDirective } from '../../shared/dropdown.directive';
 
 @Component({
@@ -12,5 +13,12 @@ import { DropdownDirective } from '../../shared/dropdown.directive';
 })
 export class RecipeDetailComponent {
   private recipesService = inject(RecipesService);
+  private shoppingListService = inject(ShoppingListService);
   selectedRecipe = this.recipesService.selectedRecipe;
+
+  onAddIngredientsToShoppingList() {
+    this.shoppingListService.addRangeIngredients(
+      this.selectedRecipe()?.ingredients || []
+    );
+  }
 }

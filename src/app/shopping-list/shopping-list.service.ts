@@ -22,4 +22,22 @@ export class ShoppingListService {
   addIngredient(newIngredient: Ingredient) {
     this.ingredients.update((x) => [...x, newIngredient]);
   }
+
+  addRangeIngredients(newIngredients: Ingredient[]) {
+    const updatedShoppingList = this.allIngredients();
+
+    newIngredients.forEach((ingredient) => {
+      const commonIngredient = this.allIngredients().find(
+        (x) => x.name.toLowerCase() === ingredient.name.toLowerCase()
+      );
+
+      if (commonIngredient) {
+        commonIngredient.amount += ingredient.amount;
+      } else {
+        updatedShoppingList.push(ingredient);
+      }
+    });
+
+    this.ingredients.set(updatedShoppingList);
+  }
 }
