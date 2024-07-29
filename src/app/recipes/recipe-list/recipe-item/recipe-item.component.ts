@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 
+import { RecipesService } from '../../recipes.service';
 import { type Recipe } from '../../recipe.model';
 
 @Component({
@@ -10,10 +11,10 @@ import { type Recipe } from '../../recipe.model';
   styleUrl: './recipe-item.component.css',
 })
 export class RecipeItemComponent {
+  private recipesService = inject(RecipesService);
   recipe = input.required<Recipe>();
-  recipeSelected = output();
 
   onClick() {
-    this.recipeSelected.emit();
+    this.recipesService.selectedRecipe.set(this.recipe());
   }
 }

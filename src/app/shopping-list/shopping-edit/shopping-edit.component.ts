@@ -1,6 +1,7 @@
-import { Component, output, viewChild, type ElementRef } from '@angular/core';
+import { Component, inject, viewChild, type ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { ShoppingListService } from '../shopping-list.service';
 import { type Ingredient } from '../../shared/ingredient.model';
 
 @Component({
@@ -11,16 +12,16 @@ import { type Ingredient } from '../../shared/ingredient.model';
   imports: [FormsModule],
 })
 export class ShoppingEditComponent {
+  private shoppingListService = inject(ShoppingListService);
   nameInput = viewChild.required<ElementRef<HTMLInputElement>>('nameInput');
   amountInput = viewChild.required<ElementRef<HTMLInputElement>>('amountInput');
-
-  ingredientAdded = output<Ingredient>();
 
   onAdd() {
     const newIngredient: Ingredient = {
       name: this.nameInput().nativeElement.value,
       amount: +this.amountInput().nativeElement.value,
     };
-    this.ingredientAdded.emit(newIngredient);
+
+    this.shoppingListService.addIngredient(newIngredient);
   }
 }

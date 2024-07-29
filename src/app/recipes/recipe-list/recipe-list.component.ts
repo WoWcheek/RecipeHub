@@ -1,7 +1,7 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
+import { RecipesService } from '../recipes.service';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
-import { type Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,18 +11,7 @@ import { type Recipe } from '../recipe.model';
   imports: [RecipeItemComponent],
 })
 export class RecipeListComponent {
-  recipes = signal<Recipe[]>([
-    {
-      name: 'A Test Recipe',
-      description: 'Simple test',
-      imagePath:
-        'https://www.howtocook.recipes/wp-content/uploads/2021/05/Ratatouille-recipe.jpg',
-    },
-  ]);
+  private recipesService = inject(RecipesService);
 
-  recipeWasSelected = output<Recipe>();
-
-  onRecipeSelected(recipe: Recipe) {
-    this.recipeWasSelected.emit(recipe);
-  }
+  recipes = this.recipesService.allRecipes();
 }

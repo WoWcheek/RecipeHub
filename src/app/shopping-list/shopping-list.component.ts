@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
+import { ShoppingListService } from './shopping-list.service';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
-import { type Ingredient } from '../shared/ingredient.model';
 
 @Component({
   selector: 'app-shopping-list',
@@ -11,18 +11,7 @@ import { type Ingredient } from '../shared/ingredient.model';
   imports: [ShoppingEditComponent],
 })
 export class ShoppingListComponent {
-  ingredients = signal<Ingredient[]>([
-    {
-      name: 'Apples',
-      amount: 5,
-    },
-    {
-      name: 'Tomatoes',
-      amount: 10,
-    },
-  ]);
+  private shoppingListService = inject(ShoppingListService);
 
-  onIngredientAdded(ingredient: Ingredient) {
-    this.ingredients.update((x) => [...x, ingredient]);
-  }
+  ingredients = this.shoppingListService.allIngredients;
 }

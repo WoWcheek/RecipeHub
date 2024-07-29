@@ -1,7 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
+import { RecipesService } from '../recipes.service';
 import { DropdownDirective } from '../../shared/dropdown.directive';
-import { type Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -11,5 +11,6 @@ import { type Recipe } from '../recipe.model';
   imports: [DropdownDirective],
 })
 export class RecipeDetailComponent {
-  selectedRecipe = input.required<Recipe>();
+  private recipesService = inject(RecipesService);
+  selectedRecipe = this.recipesService.selectedRecipe;
 }

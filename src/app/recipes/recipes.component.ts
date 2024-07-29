@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
+import { RecipesService } from './recipes.service';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { type Recipe } from './recipe.model';
@@ -12,7 +13,8 @@ import { type Recipe } from './recipe.model';
   imports: [RecipeListComponent, RecipeDetailComponent],
 })
 export class RecipesComponent {
-  selectedRecipe = signal<Recipe | undefined>(undefined);
+  private recipesService = inject(RecipesService);
+  selectedRecipe = this.recipesService.selectedRecipe;
 
   onRecipeWasSelected(recipe: Recipe) {
     this.selectedRecipe.set(recipe);
