@@ -1,22 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import { RecipesService } from './recipes.service';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
-import { type Recipe } from './recipe.model';
 
 @Component({
   selector: 'app-recipes',
   standalone: true,
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.css',
-  imports: [RecipeListComponent, RecipeDetailComponent],
+  imports: [RouterOutlet, RecipeListComponent],
 })
-export class RecipesComponent {
-  private recipesService = inject(RecipesService);
-  selectedRecipe = this.recipesService.selectedRecipe;
-
-  onRecipeWasSelected(recipe: Recipe) {
-    this.selectedRecipe.set(recipe);
-  }
-}
+export class RecipesComponent {}

@@ -1,4 +1,5 @@
-import { Component, output } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { DropdownDirective } from '../shared/dropdown.directive';
 
@@ -7,12 +8,6 @@ import { DropdownDirective } from '../shared/dropdown.directive';
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
-  imports: [DropdownDirective],
+  imports: [DropdownDirective, RouterLink, RouterLinkActive],
 })
-export class HeaderComponent {
-  featureSelected = output<string>();
-
-  onSelect(feature: string) {
-    this.featureSelected.emit(feature);
-  }
-}
+export class HeaderComponent {}

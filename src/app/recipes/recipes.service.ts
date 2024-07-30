@@ -29,7 +29,9 @@ export class RecipesService {
     },
   ]);
 
-  selectedRecipe = signal<Recipe | undefined>(undefined);
-
   allRecipes = this.recipes.asReadonly();
+
+  getRecipeByIndex(index: number) {
+    return this.allRecipes()[index];
+  }
 }

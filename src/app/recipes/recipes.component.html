@@ -3,10 +3,6 @@
     <app-recipe-list />
   </div>
   <div class="col-md-7">
-    @if (selectedRecipe()) {
-    <app-recipe-detail />
-    } @else {
-    <p>Please select a Recipe!</p>
-    }
+    <router-outlet />
   </div>
 </div>

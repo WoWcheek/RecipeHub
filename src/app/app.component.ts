@@ -1,20 +1,13 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [HeaderComponent, RecipesComponent, ShoppingListComponent],
+  imports: [HeaderComponent, RouterOutlet],
 })
-export class AppComponent {
-  currentFeature = signal('recipes');
-
-  onNavigate(feature: string) {
-    this.currentFeature.set(feature);
-  }
-}
+export class AppComponent {}
