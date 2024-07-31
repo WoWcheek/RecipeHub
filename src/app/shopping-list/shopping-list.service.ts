@@ -19,6 +19,10 @@ export class ShoppingListService {
 
   allIngredients = this.ingredients.asReadonly();
 
+  getIngredientByIndex(index: number) {
+    return this.allIngredients()[index];
+  }
+
   addIngredient(newIngredient: Ingredient) {
     this.ingredients.update((x) => [...x, newIngredient]);
   }
@@ -39,5 +43,18 @@ export class ShoppingListService {
     });
 
     this.ingredients.set(updatedShoppingList);
+  }
+
+  updateIngredient(index: number, updatedIngredient: Ingredient) {
+    this.ingredients.update((x) => {
+      const ingredientsCopy = [...x];
+      ingredientsCopy[index] = updatedIngredient;
+      return ingredientsCopy;
+    });
+  }
+
+  deleteIngredient(index: number) {
+    console.log(index);
+    this.ingredients.update((x) => x.filter((_, i) => i !== index));
   }
 }
