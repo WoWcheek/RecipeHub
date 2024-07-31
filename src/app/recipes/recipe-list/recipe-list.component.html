@@ -6,7 +6,7 @@
 <hr />
 <div class="row">
   <div class="col-xs-12">
-    @for (recipe of recipes; track $index) {
+    @for (recipe of recipes(); track $index) {
     <app-recipe-item [index]="$index" />
     }
   </div>

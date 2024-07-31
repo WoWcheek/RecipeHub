@@ -34,4 +34,20 @@ export class RecipesService {
   getRecipeByIndex(index: number) {
     return this.allRecipes()[index];
   }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.update((x) => [...x, recipe]);
+  }
+
+  updateRecipe(index: number, updatedRecipe: Recipe) {
+    this.recipes.update((x) => {
+      const recipesCopy = [...x];
+      recipesCopy[index] = updatedRecipe;
+      return recipesCopy;
+    });
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.update((x) => x.filter((_, i) => i !== index));
+  }
 }

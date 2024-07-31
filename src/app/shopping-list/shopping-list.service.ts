@@ -54,7 +54,6 @@ export class ShoppingListService {
   }
 
   deleteIngredient(index: number) {
-    console.log(index);
     this.ingredients.update((x) => x.filter((_, i) => i !== index));
   }
 }

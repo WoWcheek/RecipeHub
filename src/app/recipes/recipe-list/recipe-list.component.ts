@@ -16,7 +16,7 @@ export class RecipeListComponent {
   private recipesService = inject(RecipesService);
   private activatedRoute = inject(ActivatedRoute);
 
-  recipes = this.recipesService.allRecipes();
+  recipes = this.recipesService.allRecipes;
 
   onNewRecipe() {
     this.router.navigate(['new'], { relativeTo: this.activatedRoute });
