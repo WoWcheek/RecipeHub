@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { type Observable } from 'rxjs';
 
 import { AuthService } from './auth.service';
+import { AlertComponent } from '../shared/alert/alert.component';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
 import { type AuthResponseData } from './auth-response-data.model';
 
@@ -12,7 +13,7 @@ import { type AuthResponseData } from './auth-response-data.model';
   standalone: true,
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css',
-  imports: [FormsModule, SpinnerComponent],
+  imports: [FormsModule, SpinnerComponent, AlertComponent],
 })
 export class AuthComponent {
   private router = inject(Router);
@@ -58,5 +59,9 @@ export class AuthComponent {
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
 
     form.reset();
+  }
+
+  resetError() {
+    this.error.set(null);
   }
 }
