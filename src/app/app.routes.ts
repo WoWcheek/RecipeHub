@@ -1,5 +1,7 @@
-import { Routes } from '@angular/router';
+import { type Routes } from '@angular/router';
 
+import { authCanMatch } from './auth/auth.guard';
+import { AuthComponent } from './auth/auth.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
@@ -15,6 +17,7 @@ export const routes: Routes = [
   {
     path: 'recipes',
     component: RecipesComponent,
+    canMatch: [authCanMatch],
     children: [
       {
         path: '',
@@ -37,5 +40,9 @@ export const routes: Routes = [
   {
     path: 'shopping-list',
     component: ShoppingListComponent,
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
   },
 ];

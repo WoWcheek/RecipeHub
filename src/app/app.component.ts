@@ -1,7 +1,7 @@
 import { Component, inject, type OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { DataStorageService } from './shared/data-storage.service';
+import { AuthService } from './auth/auth.service';
 import { HeaderComponent } from './header/header.component';
 
 @Component({
@@ -12,9 +12,9 @@ import { HeaderComponent } from './header/header.component';
   imports: [HeaderComponent, RouterOutlet],
 })
 export class AppComponent implements OnInit {
-  private dataStorageService = inject(DataStorageService);
+  private authService = inject(AuthService);
 
   ngOnInit() {
-    this.dataStorageService.fetchRecipes();
+    this.authService.autoLogin();
   }
 }

@@ -5,14 +5,24 @@
     </div>
     <div class="navbar-default">
       <ul class="nav navbar-nav">
+        @if (isAuthenticated()) {
         <li routerLinkActive="active">
           <a routerLink="/recipes">Recipes</a>
         </li>
+        } @else {
+        <li routerLinkActive="active">
+          <a routerLink="/auth">Authenticate</a>
+        </li>
+        }
         <li routerLinkActive="active">
           <a routerLink="/shopping-list">Shopping List</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        @if (isAuthenticated()) {
+        <li>
+          <a style="cursor: pointer" (click)="onLogout()">Logout</a>
+        </li>
         <li class="dropdown" appDropdown>
           <a class="dropwown-toggle" style="cursor: pointer">
             Manage <span class="caret"></span>
@@ -28,6 +38,7 @@
             </li>
           </ul>
         </li>
+        }
       </ul>
     </div>
   </div>

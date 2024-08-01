@@ -4,9 +4,10 @@ import {
   withComponentInputBinding,
 } from '@angular/router';
 import { type ApplicationConfig } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { addUserToken } from './auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
         paramsInheritanceStrategy: 'always',
       })
     ),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([addUserToken])),
   ],
 };
