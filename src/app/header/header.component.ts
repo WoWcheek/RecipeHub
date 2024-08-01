@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
+import { DataStorageService } from '../shared/data-storage.service';
 import { DropdownDirective } from '../shared/dropdown.directive';
 
 @Component({
@@ -10,4 +11,14 @@ import { DropdownDirective } from '../shared/dropdown.directive';
   styleUrl: './header.component.css',
   imports: [DropdownDirective, RouterLink, RouterLinkActive],
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  private dataStorageService = inject(DataStorageService);
+
+  onSaveRecipes() {
+    this.dataStorageService.saveRecipes();
+  }
+
+  onFetchRecipes() {
+    this.dataStorageService.fetchRecipes();
+  }
+}

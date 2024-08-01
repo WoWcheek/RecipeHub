@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, type OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { DataStorageService } from './shared/data-storage.service';
 import { HeaderComponent } from './header/header.component';
 
 @Component({
@@ -10,4 +11,10 @@ import { HeaderComponent } from './header/header.component';
   styleUrl: './app.component.css',
   imports: [HeaderComponent, RouterOutlet],
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  private dataStorageService = inject(DataStorageService);
+
+  ngOnInit() {
+    this.dataStorageService.fetchRecipes();
+  }
+}
