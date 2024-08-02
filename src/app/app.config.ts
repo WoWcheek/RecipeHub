@@ -1,6 +1,8 @@
 import {
   provideRouter,
+  withPreloading,
   withRouterConfig,
+  PreloadAllModules,
   withComponentInputBinding,
 } from '@angular/router';
 import { type ApplicationConfig } from '@angular/core';
@@ -16,7 +18,8 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withRouterConfig({
         paramsInheritanceStrategy: 'always',
-      })
+      }),
+      withPreloading(PreloadAllModules)
     ),
     provideHttpClient(withInterceptors([addUserToken])),
   ],

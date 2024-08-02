@@ -2,11 +2,6 @@ import { type Routes } from '@angular/router';
 
 import { authCanMatch } from './auth/auth.guard';
 import { AuthComponent } from './auth/auth.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 
 export const routes: Routes = [
   {
@@ -16,30 +11,18 @@ export const routes: Routes = [
   },
   {
     path: 'recipes',
-    component: RecipesComponent,
+    loadComponent: () =>
+      import('./recipes/recipes.component').then((m) => m.RecipesComponent),
     canMatch: [authCanMatch],
-    children: [
-      {
-        path: '',
-        component: RecipeStartComponent,
-      },
-      {
-        path: 'new',
-        component: RecipeEditComponent,
-      },
-      {
-        path: ':id',
-        component: RecipeDetailComponent,
-      },
-      {
-        path: ':id/edit',
-        component: RecipeEditComponent,
-      },
-    ],
+    loadChildren: () =>
+      import('./recipes/recipes.routes').then((m) => m.routes),
   },
   {
     path: 'shopping-list',
-    component: ShoppingListComponent,
+    loadComponent: () =>
+      import('./shopping-list/shopping-list.component').then(
+        (m) => m.ShoppingListComponent
+      ),
   },
   {
     path: 'auth',
